@@ -33,9 +33,12 @@ namespace api.Controllers
         }
 
         // POST: api/books
+        [EnableCors("AnotherPolicy")] //security 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Book value)
         {
+            IInsertBook insertObject= new SaveBook();
+            insertObject.InsertBook(value);
         }
 
         // PUT: api/books/5

@@ -40,17 +40,18 @@ function postBook(){
             "Content-Type": 'application/json',
         },
         body:JSON.stringify({
+            isbn: bookIsbn,
             title: bookTitle,
             author: bookAuthor,
-            isbn: bookIsbn,
             genre: bookGenre
         })
     })
     .then((response)=>{
         console.log(response);
-        getBooks(); //calls back to method above and updates our website
     })
 }
+
+
 
 
 
