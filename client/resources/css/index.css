@@ -1,0 +1,19 @@
+/*this will target our jumbotron class
+setting header to blue and text to white*/
+.jumbotron{
+    background-color: #aac8c8;
+}
+
+/*makes our buttons farther apart*/
+.top-buffer {
+ margin-top: 100px;
+}
+
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template/heroic-features)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+ body {
+    padding-top: 56px;
+  }
