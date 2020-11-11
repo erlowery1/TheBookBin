@@ -61,11 +61,18 @@
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
     <div class ="row">
-        <div class = "col-md-12 ">
+        <div class = "col-md-6 ">
             <div id = "delete">
 
             </div>
         </div>
+        <div class = "col-md-6 ">
+          <!-- sort and search-->
+            <!-- creating search box -->
+                <label for = "search">Search by ISBN or Title</label>
+                <input type = "text" name = "search" id = "search"/>
+                <input type = "submit" value = "Submit" onclick="searchDelete()">
+      </div>
     </div>
     <!-- Page Content ends here -->
   </div>

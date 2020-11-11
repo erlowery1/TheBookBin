@@ -8,6 +8,7 @@ namespace api.Models
     {
         public void InsertBook(Book value)
         {   
+            //string cs ="Data Source=|DataDirectory|bookbin.db";
             string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
