@@ -54,7 +54,7 @@
 
     <!-- Jumbotron Header -->
     <header style = "background-color: #aac8c8" class = "jumbotron my-4">
-      <h1 class="display-3">Add a Book</h1>
+      <h1 class="display-3 text-center">Add a Book</h1>
     </header>
 
     <!-- Page Content begins here -->
@@ -62,20 +62,27 @@
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
     <div class ="row">
-        <div class = "col-md-12 ">
+        <div class = "col-md-6">
             <div>
                 <!--labels, textboxes, and a submit button for book data-->
                 <form onsubmit="return false;" method = "post">
                   <label for = "isbn">ISBN</label>
-                  <input type = "text" name = "isbn" id = "isbn"/>
+                  <input type = "number" name = "isbn" id = "isbn"/>
                   <label for = "title">Book Title</label>
                   <input type = "text" name = "title" id = "title"/>
                   <label for = "author">Book Author</label>
                   <input type = "text" name = "author" id = "author"/>
                   <label for = "genre">Genre</label>
                   <input type = "text" name = "genre" id = "genre"/>
+                  <label for = "price">Price</label>
+                  <input type = "number" step = "any" name = "price" id = "price"/>
                   <input type = "submit" value = "Submit" onclick="postBook()">
               </form>
+            </div>
+        </div>
+        <div class = "col-md-6">
+            <div id = "books">
+
             </div>
         </div>
     </div>

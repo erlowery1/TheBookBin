@@ -1,3 +1,6 @@
+using System.Threading;
+using System.Xml.Linq;
+using System.Security.Cryptography;
 
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -21,7 +24,7 @@ namespace api.Models
 
             List<Book> allBooks = new List<Book>();
             while(rdr.Read()){
-                allBooks.Add(new Book{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4)});
+                allBooks.Add(new Book{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5)});
             }
 
             return allBooks;
@@ -41,7 +44,7 @@ namespace api.Models
             using SQLiteDataReader rdr = cmd.ExecuteReader();
 
             rdr.Read();
-            return new Book(){Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4)};
+            return new Book(){Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5)};
 
         }
     }

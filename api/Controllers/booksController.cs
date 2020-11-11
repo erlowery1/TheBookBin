@@ -1,3 +1,4 @@
+using System.Security.AccessControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace api.Controllers
         [EnableCors("AnotherPolicy")] //security 
         [HttpPost]
         public void Post([FromBody] Book value)
-        {
+        {   System.Console.WriteLine(value);
             IInsertBook insertObject= new SaveBook();
             insertObject.InsertBook(value);
         }
@@ -48,9 +49,12 @@ namespace api.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        [EnableCors("AnotherPolicy")] //security
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            IDeleteBook deleteObject = new DeleteBook();
+            deleteObject.RemoveBook(id);
         }
     }
 }

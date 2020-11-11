@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,9 @@ namespace api
     {
         public static void Main(string[] args)
         {
-            ISeedData saveObject = new SaveData();
-            saveObject.SeedData();
+            //seeding the database
+            // ISeedData saveObject = new SaveData();
+            // saveObject.SeedData();
             CreateHostBuilder(args).Build().Run();
         }
 
