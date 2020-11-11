@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Threading;
 using System.Xml.Linq;
 using System.Security.Cryptography;
@@ -13,7 +15,10 @@ namespace api.Models
         //returns a list of all books in the database
         public List<Book> GetAllBooks()
         {
-            string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
+            //string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
+            string directory = Directory.GetCurrentDirectory();
+            Console.WriteLine(directory);
+            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 

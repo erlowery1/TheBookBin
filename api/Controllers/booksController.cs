@@ -37,8 +37,8 @@ namespace api.Controllers
         [EnableCors("AnotherPolicy")] //security 
         [HttpPost]
         public void Post([FromBody] Book value)
-        {   System.Console.WriteLine(value);
-            IInsertBook insertObject= new SaveBook();
+        {  
+             IInsertBook insertObject= new SaveBook();
             insertObject.InsertBook(value);
         }
 

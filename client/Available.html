@@ -18,6 +18,7 @@
 
 </head>
 <!--loading js-->
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script type = "text/javascript" src = "./resources/scripts/index.js"></script>
 <!--on load, get all the books in the database-->
 <body onload="getBooks()">
@@ -66,16 +67,16 @@
             <input type = "submit" value = "Show all available books" onclick="getBooks()">
       </div>
       <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Title" onclick="sort()">
+        <input type = "submit" value = "Sort by Title" onclick="sortTable()">
       </div>
       <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Author" onclick="sort()">
+        <input type = "submit" value = "Sort by Author" onclick="sortTable()">
       </div>
       <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Genre" onclick="sort()">
+        <input type = "submit" value = "Sort by Genre" onclick="sortTable()">
       </div>
       <div class = "col-md-2">
-        <input type = "submit" value = "Sort by ISBN" onclick="sort()">
+        <input type = "submit" value = "Sort by ISBN" onclick="sortTable()">
       </div>
     </div>
     <div class ="row">
@@ -84,7 +85,7 @@
             <!-- creating available books table-->
             <div id = "books">
                 
-            </div>
+            </div> 
         </div>
         <div class = "col-md-6 ">
             <!-- sort and search-->
@@ -94,6 +95,8 @@
                   <input type = "submit" value = "Submit" onclick="search()">
         </div>
     </div>
+
+
     
     <!-- Page Content ends here -->
   </div>

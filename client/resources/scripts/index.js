@@ -1,3 +1,4 @@
+
 function getBooks(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
 
@@ -9,11 +10,11 @@ function getBooks(){
         return response.json();
     }).then(function(json){
         /*border and hover are built into bootstrap and make it prettier*/
-        let html = "<table class = \"table-bordered table-hover\">";
+        let html = "<table class = \"table-bordered table-hover sortable\">";
         /*adding the table row and table headers*/
         html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>";
+            html += "<tr class = \"book\"><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>";
         });
         html += "</table>";
         //target that html element and set it equal to html
@@ -158,47 +159,53 @@ function searchDelete(){
     })
 }
 
-function sort() {
-    //sort method 
-        const allBooksApiUrl = "https://localhost:5001/api/books";
-        fetch(allBooksApiUrl).then(function(response){
-            console.log(response);
-            //turn response into a json object we can deal with 
-            return response.json();
-        }).then(function(json){
-            /*border and hover are built into bootstrap and make it prettier*/
-            let html = "<table class = \"table-bordered table-hover\">";
-            /*adding the table row and table headers*/
-            sorted = true;
-            while (sorted) {
-                 sorted = false;
-                 rows = json.rows;
-                for (i = 1; i < rows.length - 1; i++) {
-                    sortFlag = false;
-                    x = rows[i].getElementsByTagName("TD")[0];
-                    y = rows[i + 1].getElementsByTagName("TD")[0];
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    sortFlag = true;
-                    break;
-                    }
-                }
-                if (sortFlag) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    sorted = true;
-               }
-            }
-            html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
-            json.forEach((book) => {
-                    html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>"
-            });
-            html += "</table>";
-            //target that html element and set it equal to html
-            document.getElementById("books").innerHTML = html;
+function sortColumn(){
+    //call to sort method that gets list then sorts then returns
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+    allBooksApiUrl.sort
+}
+
+// function sort() {
+//     //sort method 
+//         const allBooksApiUrl = "https://localhost:5001/api/books";
+//         fetch(allBooksApiUrl).then(function(response){
+//             console.log(response);
+//             //turn response into a json object we can deal with 
+//             return response.json();
+//         }).then(function(json){
+//             /*border and hover are built into bootstrap and make it prettier*/
+//             let html = "<table class = \"table-bordered table-hover\">";
+//             /*adding the table row and table headers*/
+//             sorted = true;
+//             while (sorted) {
+//                  sorted = false;
+//                  rows = json.rows;
+//                 for (i = 1; i < rows.length - 1; i++) {
+//                     sortFlag = false;
+//                     x = rows[i].getElementsByTagName("TD")[0];
+//                     y = rows[i + 1].getElementsByTagName("TD")[0];
+//                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//                     sortFlag = true;
+//                     break;
+//                     }
+//                 }
+//                 if (sortFlag) {
+//                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+//                     sorted = true;
+//                }
+//             }
+//             html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
+//             json.forEach((book) => {
+//                     html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>"
+//             });
+//             html += "</table>";
+//             //target that html element and set it equal to html
+//             document.getElementById("books").innerHTML = html;
     
-        }).catch(function(error){ //catch any errors
-            console.log(error);
-        })
-  }
+//         }).catch(function(error){ //catch any errors
+//             console.log(error);
+//         })
+//   }
 
 
 
