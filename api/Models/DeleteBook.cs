@@ -1,11 +1,17 @@
+using System.Security.AccessControl;
 using System.Data.SQLite;
 using api.Models.Interfaces;
+using System.IO;
+using System;
+
 namespace api.Models
 {
     public class DeleteBook : IDeleteBook
     {
         public void RemoveBook(int id){
-            string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
+            string directory = Directory.GetCurrentDirectory();
+            Console.WriteLine(directory);
+            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 

@@ -1,11 +1,15 @@
+using System;
+using System.Security.AccessControl;
 using System.Runtime.InteropServices;
 using System.Data.SQLite;
+using System.IO;
 namespace api.Database
 {
     public class SaveData : ISeedData
     {
         public void SeedData(){
-            string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
+            string directory = Directory.GetCurrentDirectory();
+            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 

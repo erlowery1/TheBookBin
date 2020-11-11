@@ -18,23 +18,25 @@ namespace api
         public static void Main(string[] args)
         {
             //if posts database doesnt exist at all, create it and seed it
-            if(!System.IO.File.Exists(@"C:\Users\ellenlowery\source\repos\bookbin\bookbin.db")){
-                List<Book> allBooks = new List<Book>();
-                SQLiteConnection.CreateFile(@"C:\Users\ellenlowery\source\repos\bookbin\bookbin.db");
-                //create connection string
-                string connectionString = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
-                //connecting to the database
-                using var connection = new SQLiteConnection(connectionString);
-                //open it up 
-                connection.Open();
+            // string directory = Directory.GetCurrentDirectory();
+            // string cs = @"URI = file:"+ directory+ @"\bookbin.db";
+            // if(!System.IO.File.Exists(cs)){
+            //     List<Book> allBooks = new List<Book>();
+            //     SQLiteConnection.CreateFile(cs);
+            //     //create connection string
+            //     string connectionString = cs;
+            //     //connecting to the database
+            //     using var connection = new SQLiteConnection(connectionString);
+            //     //open it up 
+            //     connection.Open();
 
-                using var command= new SQLiteCommand(connection);
-                //create table w fields id, text, date
-                command.CommandText = @"CREATE TABLE books (id INTEGER PRIMARY KEY, isbn INTEGER, title TEXT, author TEXT, genre TEXT, price FLOAT)";
-                command.ExecuteNonQuery();
-                ISeedData saveObject = new SaveData();
-                saveObject.SeedData();
-            }
+            //     using var command= new SQLiteCommand(connection);
+            //     //create table w fields id, text, date
+            //     command.CommandText = @"CREATE TABLE books (id INTEGER PRIMARY KEY, isbn INTEGER, title TEXT, author TEXT, genre TEXT, price FLOAT)";
+            //     command.ExecuteNonQuery();
+            //     ISeedData saveObject = new SaveData();
+            //     saveObject.SeedData();
+            // }
             //seeding the database
             // ISeedData saveObject = new SaveData();
             // saveObject.SeedData();
