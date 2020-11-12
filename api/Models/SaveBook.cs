@@ -11,9 +11,9 @@ namespace api.Models
         public void InsertBook(Book value)
         {   
             string directory = Directory.GetCurrentDirectory();
-            Console.WriteLine(directory);
-            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
-            Console.WriteLine(cs);
+            //Console.WriteLine(directory);
+            string cs = @"URI = file:"+ directory+ @"/bookbin.db";
+            //Console.WriteLine(cs);
             //string cs = @"URI = file:C\Users\ellenlowery\source\repos\bookbin\bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();

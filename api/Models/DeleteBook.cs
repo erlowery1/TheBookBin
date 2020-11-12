@@ -10,8 +10,8 @@ namespace api.Models
     {
         public void RemoveBook(int id){
             string directory = Directory.GetCurrentDirectory();
-            Console.WriteLine(directory);
-            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
+            //Console.WriteLine(directory);
+            string cs = @"URI = file:"+ directory+ @"/bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e6qLpa6OO/JuLUTLr1RmEaQp/97zhNSVZFXNGtTv1tZSzMYcO75rWTpu8I/X9Wxb/OUSOqsWv1NvC3ZYUuLKvQ==",
+  "dgSpecHash": "l6srPQEfP9Y7mVxdktKxcMw2NeLnOc/QA5qJt8W+eoVp2rfthLJM8bqATYCbfr4pAQ9vbkW/D+cqvzROuO0AYg==",
   "success": true,
-  "projectFilePath": "/Users/ellenlowery/source/repos/bookbin/api/api.csproj",
+  "projectFilePath": "/Users/ellenlowery/source/repos/TheBookBin/api/api.csproj",
   "expectedPackageFiles": [
     "/Users/ellenlowery/.nuget/packages/microsoft.aspnetcore.cors/2.2.0/microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "/Users/ellenlowery/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

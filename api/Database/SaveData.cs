@@ -9,7 +9,7 @@ namespace api.Database
     {
         public void SeedData(){
             string directory = Directory.GetCurrentDirectory();
-            string cs = @"URI = file:"+ directory+ @"\bookbin.db";
+            string cs = @"URI = file:"+ directory+ @"/bookbin.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
 
