@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>The Book Bin</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/heroic-features.css" rel="stylesheet">
+
+</head>
+<!--loading js-->
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script type = "text/javascript" src = "./resources/scripts/index.js"></script>
+<!--on load, get all the books in the database-->
+<body onload="getBooks()">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">The Book Bin</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="./index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header style = "background-color: #aac8c8" class = "jumbotron my-4">
+      <h1 class="display-3 text-center">Books Available for Sell</h1>
+    </header>
+
+    <!-- Page Content begins here -->
+
+    <!--create a table that prints out the list of books here-->
+    <!--div for the rows-->
+    <div class ="row">
+      <div class = "col-md-4 ">
+            <input type = "submit" value = "Show all available books" onclick="getBooks()">
+      </div>
+      <div class = "col-md-2">
+        <input type = "submit" value = "Sort by Title" onclick="sortTable()">
+      </div>
+      <div class = "col-md-2">
+        <input type = "submit" value = "Sort by Author" onclick="sortTable()">
+      </div>
+      <div class = "col-md-2">
+        <input type = "submit" value = "Sort by Genre" onclick="sortTable()">
+      </div>
+      <div class = "col-md-2">
+        <input type = "submit" value = "Sort by ISBN" onclick="sortTable()">
+      </div>
+    </div>
+    <div class ="row">
+        <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
+        <div class = "col-md-6 ">
+            <!-- creating available books table-->
+            <div id = "books">
+                
+            </div> 
+        </div>
+        <div class = "col-md-6 ">
+            <!-- sort and search-->
+              <!-- creating search box -->
+                  <label for = "search">Search by ISBN or Title</label>
+                  <input type = "text" name = "search" id = "search"/>
+                  <input type = "submit" value = "Submit" onclick="search()">
+        </div>
+    </div>
+
+
+    
+    <!-- Page Content ends here -->
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; The Book Bin 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
