@@ -38,8 +38,8 @@ namespace api
             //     saveObject.SeedData();
             // }
             //seeding the database
-            // ISeedData saveObject = new SaveData();
-            // saveObject.SeedData();
+        ISeedData saveObject = new SaveData();
+        saveObject.SeedData();
             CreateHostBuilder(args).Build().Run();
         }
 
