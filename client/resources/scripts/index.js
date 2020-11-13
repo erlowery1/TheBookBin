@@ -1,20 +1,17 @@
 //gets all books from inventory and puts them in a table format
 function getBooks(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
-
-    //like netflix- when we are thru calculating the top ten movies today, then run this next thing
-    //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
         console.log(response);
         //turn response into a json object we can deal with 
         return response.json();
     }).then(function(json){
-        /*border and hover are built into bootstrap and make it prettier*/
-        let html = "<table class = \"table-bordered table-hover sortable\">";
+        /*border and hover make it formatted*/
+        let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
-        html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
+        html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th></tr>"
         json.forEach((book) => {
-            html += "<tr class = \"book\"><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>";
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>";
         });
         html += "</table>";
         //target that html element and set it equal to html
@@ -158,17 +155,73 @@ function searchDelete(){
         html += "</table>";
         //target that html element and set it equal to html
         document.getElementById("delete").innerHTML = html;
-
     }).catch(function(error){ //catch any errors
         console.log(error);
     })
 }
 
-function sortColumn(){
-    //call to sort method that gets list then sorts then returns
-    const allBooksApiUrl = "https://localhost:5001/api/books";
-    allBooksApiUrl.sort
-}
+function sortTable(n) {
+    var table,
+      rows,
+      switching,
+      i,
+      x,
+      y,
+      shouldSwitch,
+      dir,
+      switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    //Set the sorting direction to ascending:
+    dir = "asc";
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+      //start by saying: no switching is done:
+      switching = false;
+      rows = table.getElementsByTagName("tr");
+      /*Loop through all table rows (except the
+      first, which contains table headers):*/
+      for (i = 1; i < rows.length - 1; i++) { //Change i=0 if you have the header th a separate table.
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /*check if the two rows should switch place,
+        based on the direction, asc or desc:*/
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        //Each time a switch is done, increase this count by 1:
+        switchcount++;
+      } else {
+        /*If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again.*/
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
 
 //used to sell a book
 function bookTotal(){

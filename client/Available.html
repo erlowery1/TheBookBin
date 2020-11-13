@@ -63,29 +63,18 @@
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
     <div class ="row">
-      <div class = "col-md-4 ">
+      <div class = "col-md-12">
             <input type = "submit" value = "Show all available books" onclick="getBooks()">
-      </div>
-      <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Title" onclick="sortTable()">
-      </div>
-      <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Author" onclick="sortTable()">
-      </div>
-      <div class = "col-md-2">
-        <input type = "submit" value = "Sort by Genre" onclick="sortTable()">
-      </div>
-      <div class = "col-md-2">
-        <input type = "submit" value = "Sort by ISBN" onclick="sortTable()">
       </div>
     </div>
     <div class ="row">
         <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
         <div class = "col-md-6 ">
             <!-- creating available books table-->
-            <div id = "books">
-                
-            </div> 
+            <h4>Click on a column header to sort</h4>
+              <div id = "books">
+              </div>
+             
         </div>
         <div class = "col-md-6 ">
             <!-- sort and search-->
@@ -96,8 +85,6 @@
         </div>
     </div>
 
-
-    
     <!-- Page Content ends here -->
   </div>
   <!-- /.container -->
