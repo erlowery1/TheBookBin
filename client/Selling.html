@@ -18,8 +18,10 @@
 
 </head>
 <!--loading js-->
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script type = "text/javascript" src = "./resources/scripts/index.js"></script>
-<body onload = "getBooksToDelete()">
+<!--on load, get all the books in the database-->
+<body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -53,30 +55,35 @@
 
     <!-- Jumbotron Header -->
     <header style = "background-color: #aac8c8" class = "jumbotron my-4">
-      <h1 class="display-3 text-center">Remove a Book</h1>
+      <h1 class="display-3 text-center">Selling a Book</h1>
     </header>
 
     <!-- Page Content begins here -->
 
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
-    <div class ="row">
-        <div class = "col-md-12 ">
-            <input type = "submit" value = "Show all books" onclick="getBooksToDelete()">
+        <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
+        <div class = "col-md-6 ">
+            <!-- sort and search-->
+              <!-- creating search box -->
+                  <label for = "search">Enter ISBN or Title</label>
+                  <input type = "text" name = "search" id = "search"/>
+                  <input type = "submit" value = "Submit" onclick="bookTotal()">
         </div>
         <div class = "col-md-6 ">
-            <div id = "delete">
-
-            </div>
+            <!-- sort and search-->
+              <!-- creating search box -->
+                  <h1>Total: $ <div id = "total"></div></h1>
+                  
+                <!-- have a text box the employee enters info in until they hit complete checkout
+                when they hit complete checkout the sum of all the book prices is added together. 
+                the employee then enters how much money the customer gives them. if theres not enough $ theres an error,
+                else the list of books bought is sent to the back end & deleted from the books table and added to 
+                the transaction table and the amount of change the customer
+                needs should be printed to the screen. and the website goes to the home screen.-->
         </div>
-        <div class = "col-md-6 ">
-          <!-- sort and search-->
-            <!-- creating search box -->
-                <label for = "search">Search by ISBN or Title</label>
-                <input type = "text" name = "search" id = "search"/>
-                <input type = "submit" value = "Submit" onclick="searchDelete()">
-      </div>
     </div>
+    
     <!-- Page Content ends here -->
   </div>
   <!-- /.container -->

@@ -19,7 +19,7 @@
 </head>
 <!--loading js-->
 <script type = "text/javascript" src = "./resources/scripts/index.js"></script>
-<body onload = "getBooksToDelete()">
+<body onload = "getBooksToEdit()">
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -53,7 +53,7 @@
 
     <!-- Jumbotron Header -->
     <header style = "background-color: #aac8c8" class = "jumbotron my-4">
-      <h1 class="display-3 text-center">Remove a Book</h1>
+      <h1 class="display-3 text-center">Edit a Book</h1>
     </header>
 
     <!-- Page Content begins here -->
@@ -62,10 +62,10 @@
     <!--div for the rows-->
     <div class ="row">
         <div class = "col-md-12 ">
-            <input type = "submit" value = "Show all books" onclick="getBooksToDelete()">
-        </div>
+            <input type = "submit" value = "Show all books" onclick="getBooksToEdit()">
+      </div>
         <div class = "col-md-6 ">
-            <div id = "delete">
+            <div id = "edit">
 
             </div>
         </div>
@@ -74,7 +74,7 @@
             <!-- creating search box -->
                 <label for = "search">Search by ISBN or Title</label>
                 <input type = "text" name = "search" id = "search"/>
-                <input type = "submit" value = "Submit" onclick="searchDelete()">
+                <input type = "submit" value = "Submit" onclick="searchEdit()">
       </div>
     </div>
     <!-- Page Content ends here -->

@@ -1,4 +1,4 @@
-
+//gets all books from inventory and puts them in a table format
 function getBooks(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
 
@@ -25,6 +25,7 @@ function getBooks(){
     })
 }
 
+//gets all books from inventory and prints them out, along with a corresponding delete button
 function getBooksToDelete(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
 
@@ -51,7 +52,8 @@ function getBooksToDelete(){
         console.log(error);
     })
 }
- 
+
+//adds a book to the books table
 function postBook(){
     const postBookApiUrl = "https://localhost:5001/api/books";
     //getting the readlines from the website when a user adds a book
@@ -82,6 +84,7 @@ function postBook(){
     })
 }
 
+//deletes book from the inventory database
 deleteBook = function(id){
     console.log(id);
     //it needs to get an id so the controller knows which to delete
@@ -102,6 +105,7 @@ deleteBook = function(id){
     })
 }
 
+//used to search all available books and put matching results in a table format
 function search(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
@@ -130,6 +134,7 @@ function search(){
     })
 }
 
+//used to search all available books and put matching results in a table format along with a delete button
 function searchDelete(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
@@ -165,48 +170,89 @@ function sortColumn(){
     allBooksApiUrl.sort
 }
 
-// function sort() {
-//     //sort method 
-//         const allBooksApiUrl = "https://localhost:5001/api/books";
-//         fetch(allBooksApiUrl).then(function(response){
-//             console.log(response);
-//             //turn response into a json object we can deal with 
-//             return response.json();
-//         }).then(function(json){
-//             /*border and hover are built into bootstrap and make it prettier*/
-//             let html = "<table class = \"table-bordered table-hover\">";
-//             /*adding the table row and table headers*/
-//             sorted = true;
-//             while (sorted) {
-//                  sorted = false;
-//                  rows = json.rows;
-//                 for (i = 1; i < rows.length - 1; i++) {
-//                     sortFlag = false;
-//                     x = rows[i].getElementsByTagName("TD")[0];
-//                     y = rows[i + 1].getElementsByTagName("TD")[0];
-//                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//                     sortFlag = true;
-//                     break;
-//                     }
-//                 }
-//                 if (sortFlag) {
-//                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-//                     sorted = true;
-//                }
-//             }
-//             html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
-//             json.forEach((book) => {
-//                     html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>"
-//             });
-//             html += "</table>";
-//             //target that html element and set it equal to html
-//             document.getElementById("books").innerHTML = html;
-    
-//         }).catch(function(error){ //catch any errors
-//             console.log(error);
-//         })
-//   }
+//used to sell a book
+function bookTotal(){
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+    const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
+    let html = 0.0;
+    var list = new Array();
+    //whatever comes back from allbookspaiurl will go back as the response for the then
+    fetch(allBooksApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        json.forEach((book) => {
+            if (book.title.toLowerCase() == search || book.isbn == search)(
+                 html+= book.price
+            )
+            
+        });
+        //target that html element and set it equal to html
+        document.getElementById("total").innerHTML = html;
 
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
+
+//gets all books and prints to screen, along with a corresponding edit button for each
+function getBooksToEdit(){
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+
+    //whatever comes back from allbookspaiurl will go back as the response for the then
+    fetch(allBooksApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        /*border and hover are built into bootstrap and make it prettier*/
+        let html = "<table class = \"table-bordered table-hover\">";
+        /*adding the table row and table headers*/
+        html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Edit</th></tr>"
+        //add each book to the table, including a delete button that links to the delete book method
+        json.forEach((book) => {
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ book.price + "</td>" + 
+            "<td><button onclick = \"editBook("+book.id+")\">Edit</button></td></tr>";
+        });
+        html += "</table>";
+        //target that html element and set it equal to html
+        document.getElementById("edit").innerHTML = html;
+
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
+
+//searches all books and puts every matching result in a table along with a corresponding edit button
+function searchEdit(){
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+    const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
+    //whatever comes back from allbookspaiurl will go back as the response for the then
+    fetch(allBooksApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        /*border and hover are built into bootstrap and make it prettier*/
+        let html = "<table class = \"table-bordered table-hover\">";
+        /*adding the table row and table headers*/
+        html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Edit</th></tr>"
+        //add each book to the table, including a delete button that links to the delete book method
+        json.forEach((book) => {
+            if (book.title.toLowerCase() == search || book.isbn == search)(
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ book.price + "</td>" + 
+                "<td><button onclick = \"editBook("+book.id+")\">Edit</button></td></tr>"
+            )
+        });
+        html += "</table>";
+        //target that html element and set it equal to html
+        document.getElementById("edit").innerHTML = html;
+
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
 
 
 
