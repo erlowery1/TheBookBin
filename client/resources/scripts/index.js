@@ -221,7 +221,7 @@ function sortTable(n) {
         }
       }
     }
-  }
+}
 
 //used to sell a book
 function bookTotal(){
@@ -239,7 +239,6 @@ function bookTotal(){
             if (book.title.toLowerCase() == search || book.isbn == search)(
                  html+= book.price
             )
-            
         });
         //target that html element and set it equal to html
         document.getElementById("total").innerHTML = html;
