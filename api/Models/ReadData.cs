@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using api.Models.Interfaces;
+using api.Models;
 
 namespace api.Models
 {
@@ -72,14 +73,14 @@ namespace api.Models
 
             List<Transaction> allTransactions = new List<Transaction>();
             while(rdr.Read()){
-                allTransactions.Add(new Transaction{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5)}, Name = rdr.GetString(6), Date = rdr.GetString(7));
+                allTransactions.Add(new Transaction{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5), Name = rdr.GetString(6), Date = rdr.GetDateTime(7)});
             }
 
             return allTransactions;
         }
 
         //finds a book with the matching id and returns the data
-        public Transaction GetTransactions(int Id)
+        public Transaction GetTransaction(int Id)
         {
             string directory = Directory.GetCurrentDirectory();
             //Console.WriteLine(directory);
@@ -94,7 +95,7 @@ namespace api.Models
             using SQLiteDataReader rdr = cmd.ExecuteReader();
 
             rdr.Read();
-            return new Transaction{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5), Name = rdr.GetString(6), Date = rdr.GetString(7)};
+            return new Transaction{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5), Name = rdr.GetString(6), Date = rdr.GetDateTime(7)};
 
         }
     }

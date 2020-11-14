@@ -20,25 +20,25 @@ namespace api.Controllers
         [HttpGet]
         public List<Book> Get()
         {
-            IGetAllBooks readObject = new ReadBookData();
+            IGetAll readObject = new ReadData();
             return readObject.GetAllBooks();
         }
-        //need to make a route so this pulls from transactions database
-        //GET: api/books
-        [EnableCors("AnotherPolicy")]
-        [HttpGet]
-        public List<Book> Get()
-        {
-            IGetAllBooks readObject = new ReadBookData();
-            return readObject.GetAllBooks();
-        }
+        // //need to make a route so this pulls from transactions database
+        // //GET: api/books
+        // [EnableCors("AnotherPolicy")]
+        // [HttpGet]
+        // public List<Book> Get()
+        // {
+        //     IGetAllBooks readObject = new ReadBookData();
+        //     return readObject.GetAllBooks();
+        // }
 
         // GET: api/books/5
         [EnableCors("AnotherPolicy")]
         [HttpGet("{id}", Name = "Get")]
         public Book Get(int id)
         {
-            IGetBook readObject = new ReadBookData();
+            IGet readObject = new ReadData();
             return readObject.GetBook(id);
         }
 
@@ -47,7 +47,7 @@ namespace api.Controllers
         [HttpPost]
         public void Post([FromBody] Book value)
         {  
-             IInsertBook insertObject= new SaveBook();
+             IInsert insertObject= new SaveInfo();
             insertObject.InsertBook(value);
         }
 
@@ -62,7 +62,7 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            IDeleteBook deleteObject = new DeleteBook();
+            IDelete deleteObject = new DeleteInfo();
             deleteObject.RemoveBook(id);
         }
     }
