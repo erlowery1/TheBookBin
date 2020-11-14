@@ -1,7 +1,8 @@
 namespace api.Models.Interfaces
 {
-    public interface IDeleteBook
+    public interface IDelete
     {
          void RemoveBook(int id);
+         void RemoveTransaction(int id);
     }
 }

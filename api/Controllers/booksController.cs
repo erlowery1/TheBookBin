@@ -23,6 +23,15 @@ namespace api.Controllers
             IGetAllBooks readObject = new ReadBookData();
             return readObject.GetAllBooks();
         }
+        //need to make a route so this pulls from transactions database
+        //GET: api/books
+        // [EnableCors("AnotherPolicy")]
+        // [HttpGet]
+        // public List<Book> Get()
+        // {
+        //     IGetAllBooks readObject = new ReadBookData();
+        //     return readObject.GetAllBooks();
+        // }
 
         // GET: api/books/5
         [EnableCors("AnotherPolicy")]

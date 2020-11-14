@@ -1,7 +1,8 @@
 namespace api.Models.Interfaces
 {
-    public interface IGetBook
+    public interface IGet
     {
         Book GetBook(int id); 
+        Book GetTransaction(int id); 
     }
 }

@@ -6500,19 +6500,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Noah\\.nuget\\packages\\": {}
+    "/Users/ellenlowery/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Noah\\source\\repos\\TheBookBin\\api\\api.csproj",
+      "projectUniqueName": "/Users/ellenlowery/source/repos/TheBookBin/api/api.csproj",
       "projectName": "api",
-      "projectPath": "C:\\Users\\Noah\\source\\repos\\TheBookBin\\api\\api.csproj",
-      "packagesPath": "C:\\Users\\Noah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Noah\\source\\repos\\TheBookBin\\api\\obj\\",
+      "projectPath": "/Users/ellenlowery/source/repos/TheBookBin/api/api.csproj",
+      "packagesPath": "/Users/ellenlowery/.nuget/packages/",
+      "outputPath": "/Users/ellenlowery/source/repos/TheBookBin/api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Noah\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/ellenlowery/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -6565,7 +6565,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.401/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -223,7 +223,7 @@ function sortTable(n) {
     }
 }
 
-//used to sell a book
+//used to sell a book// /sales + id
 function bookTotal(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
