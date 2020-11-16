@@ -225,10 +225,11 @@ function sortTable(n) {
 
 //used to sell a book// /sales + id
 function bookTotal(){
+    //need to change this to the transactions api
+    //const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allTransactionsApiUrl = "https://localhost:5001/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
-    let html = 0.0;
-    var list = new Array();
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
         console.log(response);
@@ -236,12 +237,42 @@ function bookTotal(){
         return response.json();
     }).then(function(json){
         json.forEach((book) => {
-            if (book.title.toLowerCase() == search || book.isbn == search)(
-                 html+= book.price
-            )
+            if (book.title.toLowerCase() == search || book.isbn == search){
+                 const price = book.price;
+                 console.log(price);
+                 const id = book.id;
+                 const isbn = book.isbn;
+                 const title = book.title;
+                 const author = book.author;
+                 const genre = book.genre;
+                 const name = document.getElementById("custName").value;
+
+                 fetch(allTransactionsApiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Accept": 'application/json',
+                        "Content-Type": 'application/json',
+                    },
+                    body:JSON.stringify({
+                        
+                        price: parseFloat(price),
+                        id: id,
+                        isbn: isbn,
+                        title: title,
+                        author: author,
+                        genre: genre,
+                        name: name
+                    })
+                })
+                .then((response)=>{
+                    console.log(response);
+                })
+            }
+        
         });
         //target that html element and set it equal to html
-        document.getElementById("total").innerHTML = html;
+        // need to make it where the price appears at the html div
+        // document.getElementById("total").innerHTML = price;
 
     }).catch(function(error){ //catch any errors
         console.log(error);

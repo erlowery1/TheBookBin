@@ -31,6 +31,8 @@ namespace api.Models
         }
 
         public void InsertTransaction(Transaction value){
+            Console.WriteLine("made it to insert");
+            Console.WriteLine(value.Price);
             string directory = Directory.GetCurrentDirectory();
             //Console.WriteLine(directory);
             string cs = @"URI = file:"+ directory+ @"/bookbin.db";
@@ -40,6 +42,7 @@ namespace api.Models
             con.Open();
 
             using var cmd = new SQLiteCommand(con);
+            DateTime date = DateTime.Now; //getting current date time
 
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
             cmd.Parameters.AddWithValue("@isbn", value.Isbn);
@@ -48,7 +51,7 @@ namespace api.Models
             cmd.Parameters.AddWithValue("@genre", value.Genre);
             cmd.Parameters.AddWithValue("@price", value.Price);
             cmd.Parameters.AddWithValue("@name", value.Name);
-            cmd.Parameters.AddWithValue("@date", value.Date);
+            cmd.Parameters.AddWithValue("@date", date);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }

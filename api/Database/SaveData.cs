@@ -77,7 +77,7 @@ namespace api.Database
             cmd.Parameters.AddWithValue("@genre", "fantasy");
             cmd.Parameters.AddWithValue("@price", "11.25");
             cmd.Parameters.AddWithValue("@name" , "Jeff");
-            cmd.Parameters.AddWithValue("@date", "11/13/2020");
+            cmd.Parameters.AddWithValue("@date", "2020-10-30 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 
@@ -88,7 +88,7 @@ namespace api.Database
             cmd.Parameters.AddWithValue("@genre", "fantasy");
             cmd.Parameters.AddWithValue("@price", "13.55");
             cmd.Parameters.AddWithValue("@name", "Ellen");
-            cmd.Parameters.AddWithValue("@date", "11/11/2020");
+            cmd.Parameters.AddWithValue("@date", "2018-10-30 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 
@@ -99,7 +99,7 @@ namespace api.Database
             cmd.Parameters.AddWithValue("@genre", "fiction");
             cmd.Parameters.AddWithValue("@price", "9.22");
             cmd.Parameters.AddWithValue("@name", "Garrett");
-            cmd.Parameters.AddWithValue("@date", "11/08/2020");
+            cmd.Parameters.AddWithValue("@date", "2020-03-06 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
             
@@ -110,7 +110,7 @@ namespace api.Database
             cmd.Parameters.AddWithValue("@genre", "tragedy");
             cmd.Parameters.AddWithValue("@price", "6.99");
             cmd.Parameters.AddWithValue("@name", "Noah");
-            cmd.Parameters.AddWithValue("@date", "11/06/2020");
+            cmd.Parameters.AddWithValue("@date", "2010-12-25 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 
@@ -121,7 +121,7 @@ namespace api.Database
             cmd.Parameters.AddWithValue("@genre", "southern gothic");
             cmd.Parameters.AddWithValue("@price", "7.19");
             cmd.Parameters.AddWithValue("@name", "Jake");
-            cmd.Parameters.AddWithValue("@date", "10/22/2020");
+            cmd.Parameters.AddWithValue("@date", "2019-07-09 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 

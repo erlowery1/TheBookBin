@@ -11,7 +11,6 @@ using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using api.Models.Interfaces;
-using api.Models;
 
 namespace api.Models
 {
