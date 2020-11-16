@@ -223,6 +223,34 @@ function sortTable(n) {
     }
 }
 
+//finds the total of the inputted book and presents it to the screen
+function getTotal(){
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+    const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
+    let html = 0.0;
+    fetch(allBooksApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        json.forEach((book) => {
+            if (book.title.toLowerCase() == search || book.isbn == search){
+                 html = "$" + book.price;
+                 console.log("price" + book.price);
+            }
+        
+        });
+        //error handing if no matching book was found
+        if(html == 0.0){
+            html = "Sorry! That was not a valid ISBN/Title. Please try again.";
+        }
+        document.getElementById("total").innerHTML = html;
+
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
+
 //used to sell a book// /sales + id
 function bookTotal(){
     //need to change this to the transactions api
@@ -246,6 +274,7 @@ function bookTotal(){
                  const author = book.author;
                  const genre = book.genre;
                  const name = document.getElementById("custName").value;
+                 deleteBook(id);
 
                  fetch(allTransactionsApiUrl, {
                     method: "POST",

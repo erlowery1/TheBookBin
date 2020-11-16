@@ -70,19 +70,17 @@
                   <input type = "text" name = "search" id = "search"/>
                   <label for = "search">Enter Customer Name</label>
                   <input type = "text" name = "custName" id = "custName"/>
-                  <input type = "submit" value = "Checkout" onclick="bookTotal()">
+                  <input type = "submit" value = "Total" onclick="getTotal()">
+                  <input type = "submit" value = "Confirm Checkout" onclick="bookTotal()">
+                  <form action="./index.html">
+                    <input type="submit" value="Deny Checkout" />
+                </form>
+                  
         </div>
         <div class = "col-md-6 ">
             <!-- sort and search-->
               <!-- creating search box -->
-                  <h1>Total: $ <div id = "total"></div></h1>
-                  
-                <!-- have a text box the employee enters info in until they hit complete checkout
-                when they hit complete checkout the sum of all the book prices is added together. 
-                the employee then enters how much money the customer gives them. if theres not enough $ theres an error,
-                else the list of books bought is sent to the back end & deleted from the books table and added to 
-                the transaction table and the amount of change the customer
-                needs should be printed to the screen. and the website goes to the home screen.-->
+                  <h1>Total: <div id = "total"></div></h1>
         </div>
     </div>
     
