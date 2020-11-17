@@ -22,6 +22,30 @@ function getBooks(){
     })
 }
 
+//gets all books from inventory and puts them in a table format
+function getTransactions(){
+    const allSalesApiUrl = "https://localhost:5001/api/books/sales";
+    fetch(allSalesApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        /*border and hover make it formatted*/
+        let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
+        /*adding the table row and table headers*/
+        html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
+        json.forEach((book) => {
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+        });
+        html += "</table>";
+        //target that html element and set it equal to html
+        document.getElementById("reports").innerHTML = html;
+
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
+
 //gets all books from inventory and prints them out, along with a corresponding delete button
 function getBooksToDelete(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
@@ -366,6 +390,48 @@ function searchEdit(){
     })
 }
 
+function breakdown(){
+    const allSalesApiUrl = "https://localhost:5001/api/books/sales";
+    fetch(allSalesApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        var count = Object.keys(json).length;
+        //console.log(count); checking if it got the length 
+        /*border and hover make it formatted*/
+        let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
+        /*adding the table row and table headers*/
+        html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
+        var currYear = json[0].date;
+        var date = new Date(currYear);
+        console.log(date);
+        console.log(currYear);
+        var sum = json[0].price;
+        html += "<tr><td>" + json[0].id + "</td><td>" + json[0].isbn + "</td><td>" + json[0].title + "</td><td>"+ json[0].author + "</td><td>" + json[0].genre + "</td>" + "<td>" + "$" + json[0].price + "</td>" + "<td>" + json[0].name + "</td>" + "<td>" +  json[0].date + "</td>";
+        for(var i = 1; i < count; i++){
+            if(json[i].date == currYear){
+                sum += json[i].price;
+                 html += "<tr><td>" + json[i].id + "</td><td>" + json[i].isbn + "</td><td>" + json[i].title + "</td><td>"+ json[i].author + "</td><td>" + json[i].genre + "</td>" + "<td>" + "$" + json[i].price + "</td>" + "<td>" + json[i].name + "</td>" + "<td>" +  json[i].date + "</td>";
+            }
+            else{
+                html += "</table>";
+                html += sum;
+                currYear = json[i].date;
+                sum = json[i].price;
+            }
+        }
+        json.forEach((book) => {
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+        });
+        html += "</table>";
+        //target that html element and set it equal to html
+        document.getElementById("reports").innerHTML = html;
+
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+}
 
 
 

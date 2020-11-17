@@ -21,7 +21,7 @@
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <script type = "text/javascript" src = "./resources/scripts/index.js"></script>
 <!--on load, get all the books in the database-->
-<body >
+<body onload="getTransactions()">
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -55,7 +55,7 @@
 
     <!-- Jumbotron Header -->
     <header style = "background-color: #aac8c8" class = "jumbotron my-4">
-      <h1 class="display-3 text-center">Selling a Book</h1>
+      <h1 class="display-3 text-center">Financial Reports</h1>
     </header>
 
     <!-- Page Content begins here -->
@@ -64,23 +64,12 @@
     <!--div for the rows-->
         <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
         <div class = "col-md-6 ">
-            <!-- sort and search-->
-              <!-- creating search box -->
-                  <label for = "search">Enter ISBN or Title</label>
-                  <input type = "text" name = "search" id = "search"/>
-                  <label for = "search">Enter Customer Name</label>
-                  <input type = "text" name = "custName" id = "custName"/>
-                  <input type = "submit" value = "Total" onclick="getTotal()">
-                  <input type = "submit" value = "Confirm Checkout" onclick="bookTotal()">
-                  <form action="./index.html">
-                    <input type="submit" value="Deny Checkout" />
-                </form>
+                <div id = "reports"></div>
                   
-        </div>
+                </div>
         <div class = "col-md-6 ">
-            <!-- sort and search-->
-              <!-- creating search box -->
-                  <h1>Total: <div id = "total"></div></h1>
+            <input type = "submit" value = "Year breakdown" onclick = "breakdown()">
+            <input type = "submit" value = "Genre breakdown" onclick>
         </div>
     </div>
     

@@ -47,6 +47,8 @@ namespace api.Controllers
             Console.WriteLine("made it to post sale controller");
             IInsert insertObject= new SaveInfo();
             insertObject.InsertTransaction(value);
+            IDelete deleteObject = new DeleteInfo();
+            deleteObject.RemoveBook(value.Id);
         }
 
         // GET: api/books/5
