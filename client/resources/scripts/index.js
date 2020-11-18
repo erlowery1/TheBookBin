@@ -16,7 +16,6 @@ function getBooks(){
         html += "</table>";
         //target that html element and set it equal to html
         document.getElementById("books").innerHTML = html;
-
     }).catch(function(error){ //catch any errors
         console.log(error);
     })
@@ -40,7 +39,7 @@ function getTransactions(){
         html += "</table>";
         //target that html element and set it equal to html
         document.getElementById("reports").innerHTML = html;
-
+        document.getElementById("sum").innerHTML = " ";
     }).catch(function(error){ //catch any errors
         console.log(error);
     })
@@ -390,48 +389,90 @@ function searchEdit(){
     })
 }
 
+// function breakdown(){
+//     const allSalesApiUrl = "https://localhost:5001/api/books/sales";
+//     fetch(allSalesApiUrl).then(function(response){
+//         console.log(response);
+//         //turn response into a json object we can deal with 
+//         return response.json();
+//     }).then(function(json){
+//         sortTable(0); //sort table
+//         var count = Object.keys(json).length; //get number of rows
+//         //console.log(count); checking if it got the length 
+//         /*border and hover make it formatted*/
+//         let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
+//         /*adding the table row and table headers*/
+//         html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
+//         var date = json[0].date;
+//         var year = date.substring(0,4);
+//         var sum = json[0].price;
+//         html += "<tr><td>" + json[0].id + "</td><td>" + json[0].isbn + "</td><td>" + json[0].title + "</td><td>"+ json[0].author + "</td><td>" + json[0].genre + "</td>" + "<td>" + "$" + json[0].price + "</td>" + "<td>" + json[0].name + "</td>" + "<td>" +  json[0].date + "</td>";
+//         for(var i = 1; i < count; i++){
+//             if(json[i].date == year){
+//                 sum += json[i].price;
+//                  html += "<tr><td>" + json[i].id + "</td><td>" + json[i].isbn + "</td><td>" + json[i].title + "</td><td>"+ json[i].author + "</td><td>" + json[i].genre + "</td>" + "<td>" + "$" + json[i].price + "</td>" + "<td>" + json[i].name + "</td>" + "<td>" +  json[i].date + "</td>";
+//             }
+//             else{
+//                 html += "</table>";
+//                 html += sum;
+//                 date = json[i].date;
+//                 year = date.substring(0,4);
+//                 sum = json[i].price;
+//             }
+//         }
+//         json.forEach((book) => {
+//             html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+//         });
+//         html += "</table>";
+//         //target that html element and set it equal to html
+//         document.getElementById("reports").innerHTML = html;
+
+//     }).catch(function(error){ //catch any errors
+//         console.log(error);
+//     })
+// }
+
 function breakdown(){
-    const allSalesApiUrl = "https://localhost:5001/api/books/sales";
-    fetch(allSalesApiUrl).then(function(response){
+    const allBooksApiUrl = "https://localhost:5001/api/books/sales";
+    const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
+    //whatever comes back from allbookspaiurl will go back as the response for the then
+    fetch(allBooksApiUrl).then(function(response){
         console.log(response);
         //turn response into a json object we can deal with 
         return response.json();
     }).then(function(json){
-        var count = Object.keys(json).length;
-        //console.log(count); checking if it got the length 
-        /*border and hover make it formatted*/
-        let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
+        /*border and hover are built into bootstrap and make it prettier*/
+        let html = "<table class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
-        html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
-        var currYear = json[0].date;
-        var date = new Date(currYear);
-        console.log(date);
-        console.log(currYear);
-        var sum = json[0].price;
-        html += "<tr><td>" + json[0].id + "</td><td>" + json[0].isbn + "</td><td>" + json[0].title + "</td><td>"+ json[0].author + "</td><td>" + json[0].genre + "</td>" + "<td>" + "$" + json[0].price + "</td>" + "<td>" + json[0].name + "</td>" + "<td>" +  json[0].date + "</td>";
-        for(var i = 1; i < count; i++){
-            if(json[i].date == currYear){
-                sum += json[i].price;
-                 html += "<tr><td>" + json[i].id + "</td><td>" + json[i].isbn + "</td><td>" + json[i].title + "</td><td>"+ json[i].author + "</td><td>" + json[i].genre + "</td>" + "<td>" + "$" + json[i].price + "</td>" + "<td>" + json[i].name + "</td>" + "<td>" +  json[i].date + "</td>";
-            }
-            else{
-                html += "</table>";
-                html += sum;
-                currYear = json[i].date;
-                sum = json[i].price;
-            }
-        }
+        html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>";        //add each book to the table, including a delete button that links to the delete book method
+        var total = "Your total revenue for "+search+" was: ";
+        var revenue = 0;
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+             var dateString = book.date;
+             var year = dateString.substring(0,4);
+             var month = dateString.substring(5,7);
+             console.log("month" + month);
+            if (book.genre.toLowerCase() == search || year == search || month == search){ // || year == search
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+                revenue += book.price;
+            }
         });
+        console.log(sum);
         html += "</table>";
+        if(revenue == 0){
+            total = "There were no reports matching your search. Please try again.";
+            revenue = " ";
+            html = " ";
+        }
+        else{
+            total = total + " $" + revenue;
+
+        }
         //target that html element and set it equal to html
         document.getElementById("reports").innerHTML = html;
+        document.getElementById("sum").innerHTML = total;
 
     }).catch(function(error){ //catch any errors
         console.log(error);
     })
 }
-
-
-
