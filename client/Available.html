@@ -54,8 +54,10 @@
   <div class="container">
 
     <!-- Jumbotron Header -->
-    <header style = "background-color: #aac8c8" class = "jumbotron my-4">
-      <h1 class="display-3 text-center">Books Available for Sell</h1>
+    <header style = "background-color: #aac8c8" class = "jumbotron my-4 text-center">
+      <header>
+        <img id="img1" src = "./resources/images/logo.png" height="200px"/><span id="txt" style = "font: normal 50px georgia !important;">Books Available for Sale</span><img id="img2" src = "./resources/images/logo.png" height="200px"/>
+      </header> 
     </header>
 
     <!-- Page Content begins here -->
@@ -64,14 +66,24 @@
     <!--div for the rows-->
     <div class ="row">
       <div class = "col-md-12">
-            <input type = "submit" value = "Show all available books" onclick="getBooks()">
+            <input type = "submit" value = "Show All Available Books" onclick="getBooks()">
       </div>
     </div>
+    <!--styles the buttons-->
+    <style>
+      input[type="submit"]{
+          background-color: #c3d6c2;
+          color: #000;
+          border-radius: 100px;
+          font-size: 20px;
+          font: normal 20px georgia !important;
+      }
+      </style>
     <div class ="row">
         <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
         <div class = "col-md-6 ">
             <!-- creating available books table-->
-            <h4>Click on a column header to sort</h4>
+            <h1> </h1>
               <div id = "books">
               </div>
              
@@ -83,6 +95,14 @@
                   <input type = "text" name = "search" id = "search"/>
                   <input type = "submit" value = "Submit" onclick="search()">
         </div>
+        <head>
+          <!--styles the labels-->
+          <style type="text/css">
+              label {
+                  font: normal 25px georgia !important;
+              }
+          </style>
+      </head>
     </div>
 
     <!-- Page Content ends here -->

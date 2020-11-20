@@ -9,12 +9,39 @@ setting header to blue and text to white*/
  margin-top: 100px;
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
+#small-logo{
+  height: 100px;
+}
+
+.logo {
+  width: 150px;
+  height: 120px;
+  content: url(logo.jpg);
+}
+
+.logoHeader {
+  height: 120px;
+  vertical-align: middle;
+  text-align: center; 
+}
+
+.floatLeft { float: left; }
+
+.floatRight { float: right; }
 
 
 /*!
