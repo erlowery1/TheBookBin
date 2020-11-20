@@ -54,7 +54,7 @@
   <div class="container">
 
     <!-- Jumbotron Header -->
-    <header style = "background-color: #aac8c8" class = "jumbotron my-4 text-center">
+    <header style = "background-color: #aac8c8; height: 275px;" class = "jumbotron my-4 text-center">
       <header>
         <img id="img1" src = "./resources/images/logo.png" height="200px"/><span id="txt" style = "font: normal 50px georgia !important;">Financial Reports</span><img id="img2" src = "./resources/images/logo.png" height="200px"/>
       </header> 
@@ -66,15 +66,15 @@
     <!--div for the rows-->
         <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
         
-        <div class = "col-md-6">
+        <div class = "col-md-12 text-center">
                 <label for = "search">Enter a Year(yyyy), Month(mm), or Genre:</label>
                 <input type = "text" name = "search" id = "search"/>
                 <input type = "submit" value = "Submit" onclick="breakdown()">
                 <input type = "submit" value = "Show All Transactions" onclick="getTransactions()">
-        <div class = "col-md-6">
+        <div class = "col-md-12">
             <div id = "sum" > </div>
         </div>
-        <div class = "col-md-6 ">
+        <div class = "col-md-12 ">
             <div id = "reports"></div>
               
          </div>

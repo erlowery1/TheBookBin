@@ -54,7 +54,7 @@
   <div class="container">
 
     <!-- Jumbotron Header -->
-    <header style = "background-color: #aac8c8" class = "jumbotron my-4 text-center">
+    <header style = "background-color: #aac8c8; height: 275px;" class = "jumbotron my-4 text-center">
       <header>
         <img id="img1" src = "./resources/images/logo.png" height="200px"/><span id="txt" style = "font: normal 50px georgia !important;">Selling a Book</span><img id="img2" src = "./resources/images/logo.png" height="200px"/>
       </header> 
@@ -65,20 +65,24 @@
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
         <!--we are having 2 columns so its 6 wide, cause it has to add to 12-->
-        <div class = "col-md-6 ">
+        <div class = "col-md-12 text-center ">
             <!-- sort and search-->
               <!-- creating search box -->
                   <label for = "search" style="text-align: center;">Enter ISBN or Title</label>
                   <input type = "text" name = "search" id = "search"/>
                   <label for = "search">Enter Customer Name</label>
                   <input type = "text" name = "custName" id = "custName"/>
-                  <input type = "submit" value = "Total" onclick="getTotal()">
-                  <input type = "submit" value = "Confirm Checkout" onclick="bookTotal()" style="background-color: green;">
-                  <form action="./index.html">
-                    <input type="submit" value="Deny Checkout" style="background-color: #cd2532;"/>
-                </form>
-                  
+                  <input type = "submit" value = "Total" onclick="getTotal()" style="color: black">
+        </div> 
+        <div class = "col-md-12 text-center ">
+          <input type = "submit" value = "Confirm Checkout" onclick="bookTotal()" style="background-color: green;">
+          <form action="./index.html">
+            <input type="submit" value="Deny Checkout" style="background-color: #cd2532;"/>
+        </form>
         </div>
+                  
+                  
+       
         <div class = "col-md-6 ">
             <!-- sort and search-->
               <!-- creating search box -->
@@ -95,10 +99,10 @@
           input[type="submit"]{
               /* change these properties to whatever you want */
               background-color: #c3d6c2;
-              color: #000;
+              color: #ffffff;
               border-radius: 100px;
               font-size: 20px;
-              font: normal 20px georgia !important;
+              font: normal 25px georgia !important;
           }
           </style>
     </div>
