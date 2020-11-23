@@ -90,7 +90,6 @@ if(bookTitle == "" || bookAuthor == "" ||bookIsbn == ""||bookGenre == "" ||bookP
 }
 else{
     html = "Success! Your book was added to inventory.";
-
     //make call to the backend, pass it the data, and make it do its thing
     fetch(postBookApiUrl, {
         method: "POST",
@@ -396,6 +395,27 @@ function getBooksToEdit(){
     })
 }
 
+//deletes book from the inventory database
+editBook = function(id){
+    console.log(id);
+    //it needs to get an id so the controller knows which to delete
+    const deleteBookApiUrl = "https://localhost:5001/api/books/" + id;
+    //getting the readlines from the website when a user adds a book
+
+    //make call to the backend, pass it the data, and make it run the delete
+    fetch(deleteBookApiUrl, {
+        method: "DELETE",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json',
+        }
+    })
+    .then((response)=>{
+        console.log(response);
+        getBooksToDelete();
+    })
+}
+
 //searches all books and puts every matching result in a table along with a corresponding edit button
 function searchEdit(){
     const allBooksApiUrl = "https://localhost:5001/api/books";
@@ -427,48 +447,6 @@ function searchEdit(){
     })
 }
 
-// function breakdown(){
-//     const allSalesApiUrl = "https://localhost:5001/api/books/sales";
-//     fetch(allSalesApiUrl).then(function(response){
-//         console.log(response);
-//         //turn response into a json object we can deal with 
-//         return response.json();
-//     }).then(function(json){
-//         sortTable(0); //sort table
-//         var count = Object.keys(json).length; //get number of rows
-//         //console.log(count); checking if it got the length 
-//         /*border and hover make it formatted*/
-//         let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
-//         /*adding the table row and table headers*/
-//         html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
-//         var date = json[0].date;
-//         var year = date.substring(0,4);
-//         var sum = json[0].price;
-//         html += "<tr><td>" + json[0].id + "</td><td>" + json[0].isbn + "</td><td>" + json[0].title + "</td><td>"+ json[0].author + "</td><td>" + json[0].genre + "</td>" + "<td>" + "$" + json[0].price + "</td>" + "<td>" + json[0].name + "</td>" + "<td>" +  json[0].date + "</td>";
-//         for(var i = 1; i < count; i++){
-//             if(json[i].date == year){
-//                 sum += json[i].price;
-//                  html += "<tr><td>" + json[i].id + "</td><td>" + json[i].isbn + "</td><td>" + json[i].title + "</td><td>"+ json[i].author + "</td><td>" + json[i].genre + "</td>" + "<td>" + "$" + json[i].price + "</td>" + "<td>" + json[i].name + "</td>" + "<td>" +  json[i].date + "</td>";
-//             }
-//             else{
-//                 html += "</table>";
-//                 html += sum;
-//                 date = json[i].date;
-//                 year = date.substring(0,4);
-//                 sum = json[i].price;
-//             }
-//         }
-//         json.forEach((book) => {
-//             html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
-//         });
-//         html += "</table>";
-//         //target that html element and set it equal to html
-//         document.getElementById("reports").innerHTML = html;
-
-//     }).catch(function(error){ //catch any errors
-//         console.log(error);
-//     })
-// }
 
 function breakdown(){
     const allBooksApiUrl = "https://localhost:5001/api/books/sales";
@@ -498,7 +476,7 @@ function breakdown(){
         });
         console.log(sum);
         html += "</table>";
-        if(revenue == 0){
+        if(revenue == 0){ //error handling
             total = "There were no reports matching your search. Please try again.";
             revenue = " ";
             html = " ";
