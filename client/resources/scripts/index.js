@@ -83,14 +83,15 @@ function postBook(){
     const bookGenre = document.getElementById("genre").value;
     const bookPrice = document.getElementById("price").value;
     let html = "";
+    //ERROR handling for if every field wasnt entered
 if(bookTitle == "" || bookAuthor == "" ||bookIsbn == ""||bookGenre == "" ||bookPrice == ""){
     html = "Sorry! Not all fields were entered and the book did not add. Please try again.";
     console.log(html);
     document.getElementById("error").innerHTML = html;
 }
-else{
+else{ //add book to inventory
     html = "Success! Your book was added to inventory.";
-    //make call to the backend, pass it the data, and make it do its thing
+    //make call to the backend, pass it the data, and make post the book
     fetch(postBookApiUrl, {
         method: "POST",
         headers: {
@@ -107,9 +108,9 @@ else{
     })
     .then((response)=>{
         console.log(response);
-        getBooks();
+        getBooks(); //show all books
     })
-    document.getElementById("error").innerHTML = html;
+    document.getElementById("error").innerHTML = html; //return success method
 }
 }
 
@@ -130,7 +131,7 @@ deleteBook = function(id){
     })
     .then((response)=>{
         console.log(response);
-        getBooksToDelete();
+        getBooksToDelete(); //refresh page
     })
 }
 
@@ -148,7 +149,6 @@ function search(){
         let html = "<font size=\"5\" face=\"Georgia\" ><table style= \"margin:0 auto;\" id = \"myTable\" class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th>";
-        //html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th></tr>"
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
                 html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>"
@@ -178,7 +178,6 @@ function searchDelete(){
         let html = "<font size=\"5\" face=\"Georgia\" ><table style= \"margin:0 auto;\" id = \"myTable\" class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th><th>Delete</th></tr>"
-        //html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Delete</th></tr>"
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
@@ -194,6 +193,7 @@ function searchDelete(){
     })
 }
 
+//sort headers when you click them
 function sortTable(n) {
     var table,
       rows,
@@ -268,6 +268,7 @@ function getTotal(){
         return response.json();
     }).then(function(json){
         json.forEach((book) => {
+            //if we found a matching book, increase the total
             if (book.title.toLowerCase() == search || book.isbn == search){
                  html = "$" + book.price;
                  console.log("price" + book.price);
@@ -297,22 +298,19 @@ function getChange(){
         return response.json();
     }).then(function(json){
         json.forEach((book) => {
+            //if we found a match, calculate change to two decimal places
             if (book.title.toLowerCase() == search || book.isbn == search){
                  html = "$" + Math.round((change - book.price) * 100 + Number.EPSILON) / 100;
-                 console.log("price" + book.price);
             }
             document.getElementById("change").innerHTML = html;
         });
     }).catch(function(error){ //catch any errors
         console.log(error);
     })
-    
-
 }
-//used to sell a book// /sales + id
+
+//sell a book- remove it from inventory and add it to transaction
 function bookTotal(){
-    //need to change this to the transactions api
-    //const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const allBooksApiUrl = "https://localhost:5001/api/books";
     const allTransactionsApiUrl = "https://localhost:5001/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
@@ -323,9 +321,9 @@ function bookTotal(){
         return response.json();
     }).then(function(json){
         json.forEach((book) => {
+            //if  you found a match, delete from inventory and add it to transaction
             if (book.title.toLowerCase() == search || book.isbn == search){
                  const price = book.price;
-                 console.log(price);
                  const id = book.id;
                  const isbn = book.isbn;
                  const title = book.title;
@@ -357,9 +355,6 @@ function bookTotal(){
             }
         
         });
-        //target that html element and set it equal to html
-        // need to make it where the price appears at the html div
-        // document.getElementById("total").innerHTML = price;
 
     }).catch(function(error){ //catch any errors
         console.log(error);
@@ -380,7 +375,6 @@ function getBooksToEdit(){
         let html = "<font size=\"5\" face=\"Georgia\" > <table style= \"margin:0 auto;\" id = \"myTable\" class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th><th>Edit</th></tr>"
-        //html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Edit</th></tr>"
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
@@ -411,7 +405,6 @@ function searchEdit(){
         let html = "<font size=\"5\" face=\"Georgia\" > <table style= \"margin:0 auto;\" id = \"myTable\" class = \"table-bordered table-hover\">";
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th><th>Edit</th></tr>"
-        //html +="<tr><th>ID</th><th>ISBN</th><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Edit</th></tr>"
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
@@ -444,6 +437,7 @@ function breakdown(){
         var total = "Your total revenue for "+search+" was: ";
         var revenue = 0;
         json.forEach((book) => {
+            //break data into different vars we can compare with the search 
              var dateString = book.date;
              var yearMonth = dateString.substring(0,7);
              var year = dateString.substring(0,4);
@@ -473,6 +467,7 @@ function breakdown(){
     })
 }
 
+//edits a book in inventory
 function editBook(id, isbn, title, author, genre, price){
     //pass id in with url
     var editBookApiUrl = "https://localhost:5001/api/books/" + id;
@@ -510,6 +505,7 @@ function editBook(id, isbn, title, author, genre, price){
         console.log("price " + bookPrice);
     }
 
+    //edit
     fetch(editBookApiUrl, {
         method: "PUT",
         headers: {
