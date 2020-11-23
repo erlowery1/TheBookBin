@@ -73,6 +73,29 @@
     <!--create a table that prints out the list of books here-->
     <!--div for the rows-->
     <div class ="row">
+      <div class = "col-md-12 text-center">
+          <div>
+              <!--labels, textboxes, and a submit button for book data-->
+              <form onsubmit="return false;" method = "post">
+                <div >
+                  <label for = "isbn">ISBN</label>
+                  <input type = "number" name = "isbn" id = "isbn"/>
+                  <label for = "title">Book Title</label>
+                  <input type = "text" name = "title" id = "title"/>
+                  <label for = "author">Book Author</label>
+                  <input type = "text" name = "author" id = "author"/>
+                </div>
+                <div>
+
+                  <label for = "genre">Genre</label>
+                  <input type = "text" name = "genre" id = "genre"/>
+                  <label for = "price">Price</label>
+                  <input type = "number" step = "any" name = "price" id = "price"/>
+                </div>
+            </form>
+          </div>
+      </div>
+    <div class ="row">
       <div class = "col-md-6 ">
           <!-- creating search box -->
               <label for = "search">Search by ISBN or Title</label>

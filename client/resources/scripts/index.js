@@ -447,7 +447,6 @@ function searchEdit(){
     })
 }
 
-
 function breakdown(){
     const allBooksApiUrl = "https://localhost:5001/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
@@ -491,5 +490,39 @@ function breakdown(){
 
     }).catch(function(error){ //catch any errors
         console.log(error);
+    })
+}
+
+function editBook(id){
+    console.log(id);
+
+    const editBookApiUrl = "https://localhost:5001/api/books/" + id;
+    const bookIsbn = document.getElementById("isbn").value;
+    console.log(bookIsbn);
+    const bookTitle = document.getElementById("title").value;
+    console.log(bookTitle);
+    const bookAuthor = document.getElementById("author").value;
+    console.log(bookAuthor);
+    const bookGenre = document.getElementById("genre").value;
+    const bookPrice = document.getElementById("price").value;
+
+    fetch(editBookApiUrl, {
+        method: "PUT",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            bookIsbn: bookIsbn,
+            bookTitle: bookTitle,
+            bookAuthor: bookAuthor,
+            bookGenre: bookGenre,
+            bookPrice: bookPrice
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        getBooksToEdit();
     })
 }
