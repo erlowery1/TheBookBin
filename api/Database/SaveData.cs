@@ -71,11 +71,11 @@ namespace api.Database
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
-            cmd.Parameters.AddWithValue("@isbn", 9781427206374);
-            cmd.Parameters.AddWithValue("@title", "Mistborn");
-            cmd.Parameters.AddWithValue("@author", "Brandon Sanderson");
-            cmd.Parameters.AddWithValue("@genre", "fantasy");
-            cmd.Parameters.AddWithValue("@price", "11.25");
+            cmd.Parameters.AddWithValue("@isbn", 9780451531353);
+            cmd.Parameters.AddWithValue("@title", "The Scarlet Letter");
+            cmd.Parameters.AddWithValue("@author", "Nathaniel Hawthorne");
+            cmd.Parameters.AddWithValue("@genre", "Romanticism");
+            cmd.Parameters.AddWithValue("@price", "5.05");
             cmd.Parameters.AddWithValue("@name" , "Jeff");
             cmd.Parameters.AddWithValue("@date", "2020-10-30 12:12:12");
             cmd.Prepare();
@@ -93,10 +93,10 @@ namespace api.Database
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
-            cmd.Parameters.AddWithValue("@isbn", 9780439023481);
-            cmd.Parameters.AddWithValue("@title", "The Hunger Games");
-            cmd.Parameters.AddWithValue("@author", "Suzanne Collins");
-            cmd.Parameters.AddWithValue("@genre", "fiction");
+            cmd.Parameters.AddWithValue("@isbn", 9787543321724);
+            cmd.Parameters.AddWithValue("@title", "The Catcher in the Rye");
+            cmd.Parameters.AddWithValue("@author", "J. D. Salinger");
+            cmd.Parameters.AddWithValue("@genre", "Fiction");
             cmd.Parameters.AddWithValue("@price", "9.22");
             cmd.Parameters.AddWithValue("@name", "Garrett");
             cmd.Parameters.AddWithValue("@date", "2020-03-06 12:12:12");
@@ -104,21 +104,21 @@ namespace api.Database
             cmd.ExecuteNonQuery();
             
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
-            cmd.Parameters.AddWithValue("@isbn", 9780439023481);
-            cmd.Parameters.AddWithValue("@title", "The Great Gatsby");
-            cmd.Parameters.AddWithValue("@author", "F. Scott Fitzgerald");
-            cmd.Parameters.AddWithValue("@genre", "tragedy");
-            cmd.Parameters.AddWithValue("@price", "6.99");
+            cmd.Parameters.AddWithValue("@isbn", 9780810993136);
+            cmd.Parameters.AddWithValue("@title", "Diary of a Wimpy Kid");
+            cmd.Parameters.AddWithValue("@author", "Jeff Kinney");
+            cmd.Parameters.AddWithValue("@genre", "Fiction");
+            cmd.Parameters.AddWithValue("@price", "3.87");
             cmd.Parameters.AddWithValue("@name", "Noah");
             cmd.Parameters.AddWithValue("@date", "2010-12-25 12:12:12");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
-            cmd.Parameters.AddWithValue("@isbn", 9780446310789);
-            cmd.Parameters.AddWithValue("@title", "To Kill a Mockingbird");
-            cmd.Parameters.AddWithValue("@author", "Harper Lee");
-            cmd.Parameters.AddWithValue("@genre", "southern gothic");
+            cmd.Parameters.AddWithValue("@isbn", 9781512308051);
+            cmd.Parameters.AddWithValue("@title", "Frankenstein");
+            cmd.Parameters.AddWithValue("@author", "Mary Shelley");
+            cmd.Parameters.AddWithValue("@genre", "Gothic Fiction");
             cmd.Parameters.AddWithValue("@price", "7.19");
             cmd.Parameters.AddWithValue("@name", "Jake");
             cmd.Parameters.AddWithValue("@date", "2019-07-09 12:12:12");

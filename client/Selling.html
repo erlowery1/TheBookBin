@@ -39,12 +39,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -68,11 +62,14 @@
         <div class = "col-md-12 text-center ">
             <!-- sort and search-->
               <!-- creating search box -->
-                  <label for = "search" style="text-align: center;">Enter ISBN or Title</label>
+                  <label for = "search">Enter ISBN or Title</label>
                   <input type = "text" name = "search" id = "search"/>
                   <label for = "search">Enter Customer Name</label>
                   <input type = "text" name = "custName" id = "custName"/>
                   <input type = "submit" value = "Total" onclick="getTotal()" style="color: black">
+                  <label for = "getChange">Enter Amount of Money Received</label>
+                  <input type = "text" name = "getChange" id = "getChange"/>
+                  <input type = "submit" value = "Calculate Change" onclick="getChange()" style="color: black">
         </div> 
         <div class = "col-md-12 text-center ">
           <input type = "submit" value = "Confirm Checkout" onclick="bookTotal()" style="background-color: green;">
@@ -88,6 +85,11 @@
               <!-- creating search box -->
                   <h1>Total: <div id = "total"></div></h1>
         </div>
+        <div class = "col-md-6 ">
+          <!-- sort and search-->
+            <!-- creating search box -->
+                <h1>Change: <div id = "change"></div></h1>
+      </div>
         <!--styles labels-->
         <style type="text/css">
           label {

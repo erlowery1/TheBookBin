@@ -82,6 +82,14 @@ function postBook(){
     const bookIsbn = document.getElementById("isbn").value;
     const bookGenre = document.getElementById("genre").value;
     const bookPrice = document.getElementById("price").value;
+    let html = "";
+if(bookTitle == "" || bookAuthor == "" ||bookIsbn == ""||bookGenre == "" ||bookPrice == ""){
+    html = "Sorry! Not all fields were entered and the book did not add. Please try again.";
+    console.log(html);
+    document.getElementById("error").innerHTML = html;
+}
+else{
+    html = "Success! Your book was added to inventory.";
 
     //make call to the backend, pass it the data, and make it do its thing
     fetch(postBookApiUrl, {
@@ -102,6 +110,8 @@ function postBook(){
         console.log(response);
         getBooks();
     })
+    document.getElementById("error").innerHTML = html;
+}
 }
 
 //deletes book from the inventory database
@@ -276,6 +286,30 @@ function getTotal(){
     })
 }
 
+//calculate change that should be given to a customer
+function getChange(){
+    const allBooksApiUrl = "https://localhost:5001/api/books";
+    const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
+    const change = document.getElementById("getChange").value;
+    let html = 0.0;
+    fetch(allBooksApiUrl).then(function(response){
+        console.log(response);
+        //turn response into a json object we can deal with 
+        return response.json();
+    }).then(function(json){
+        json.forEach((book) => {
+            if (book.title.toLowerCase() == search || book.isbn == search){
+                 html = "$" + Math.round((change - book.price) * 100 + Number.EPSILON) / 100;
+                 console.log("price" + book.price);
+            }
+            document.getElementById("change").innerHTML = html;
+        });
+    }).catch(function(error){ //catch any errors
+        console.log(error);
+    })
+    
+
+}
 //used to sell a book// /sales + id
 function bookTotal(){
     //need to change this to the transactions api
@@ -453,10 +487,11 @@ function breakdown(){
         var revenue = 0;
         json.forEach((book) => {
              var dateString = book.date;
+             var yearMonth = dateString.substring(0,7);
              var year = dateString.substring(0,4);
              var month = dateString.substring(5,7);
              console.log("month" + month);
-            if (book.genre.toLowerCase() == search || year == search || month == search){ // || year == search
+            if (book.genre.toLowerCase() == search || year == search || month == search|| yearMonth == search){ // || year == search
                 html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
                 revenue += book.price;
             }
