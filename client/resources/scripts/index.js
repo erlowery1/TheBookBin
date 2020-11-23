@@ -384,7 +384,8 @@ function getBooksToEdit(){
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
-            "<td><button onclick = \"editBook("+book.id+")\">Edit</button></td></tr>";
+            "<td><button onclick = \"editBook("+book.id+", "+book.isbn+", \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>";
+            //, "+book.title+", "+book.genre+", "+book.price+"
         });
         html += "</table>";
         //target that html element and set it equal to html
@@ -415,7 +416,7 @@ function searchEdit(){
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
                 html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
-                "<td><button onclick = \"editBook("+book.id+")\">Edit</button></td></tr>"
+                "<td><button onclick = \"editBook("+book.id+", "+book.isbn+", \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>"
             )
         });
         html += "</table>";
@@ -462,7 +463,6 @@ function breakdown(){
         }
         else{
             total = total + " $" + revenue;
-
         }
         //target that html element and set it equal to html
         document.getElementById("reports").innerHTML = html;
@@ -473,21 +473,41 @@ function breakdown(){
     })
 }
 
-function editBook(id){
+function editBook(id, isbn, title, author, genre, price){
     //pass id in with url
     var editBookApiUrl = "https://localhost:5001/api/books/" + id;
     //set all text boxes to variables
     var bookIsbn = document.getElementById("isbnEdit").value;
-    console.log(bookIsbn);
     var bookTitle = document.getElementById("titleEdit").value;
-    console.log(bookTitle);
     var bookAuthor = document.getElementById("authorEdit").value;
     var bookGenre = document.getElementById("genreEdit").value;
     var bookPrice = document.getElementById("priceEdit").value;
+
+    //if any of the textboxed are empty, set it to the original data for that field
     if(bookIsbn == ""){
         console.log("its empty")
-        bookIsbn = "123";
+        bookIsbn = isbn;
         console.log("isbn " + bookIsbn);
+    }
+    if(bookTitle == ""){
+        console.log("its empty")
+        bookTitle = title;
+        console.log("title " + bookTitle);
+    }
+    if(bookAuthor == ""){
+        console.log("its empty")
+        bookAuthor = author;
+        console.log("author " + bookAuthor);
+    }
+    if(bookGenre == ""){
+        console.log("its empty")
+        bookGenre = genre;
+        console.log("genre " + bookGenre);
+    }
+    if(bookPrice == ""){
+        console.log("its empty")
+        bookPrice = price;
+        console.log("price " + bookPrice);
     }
 
     fetch(editBookApiUrl, {
