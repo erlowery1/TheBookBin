@@ -16,10 +16,14 @@ namespace api.Models
 
             using var cmd = new SQLiteCommand(con);
 
-            Console.WriteLine(value.Title);
-
+            Console.WriteLine("isbn " + value.Isbn);
+            Console.WriteLine("title " + value.Title);
+            Console.WriteLine("author " + value.Author);
+            Console.WriteLine("genre " + value.Genre);
+            Console.WriteLine("price " + value.Price);
             cmd.CommandText = @"UPDATE books set isbn = @isbn, title = @title, author = @author, genre = @genre, price = @price WHERE id = @id";
             cmd.Parameters.AddWithValue("@id", id);
+            
             cmd.Parameters.AddWithValue("@isbn", value.Isbn);
             cmd.Parameters.AddWithValue("@title", value.Title);
             cmd.Parameters.AddWithValue("@author", value.Author);

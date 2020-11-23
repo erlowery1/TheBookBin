@@ -74,10 +74,8 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Book value)
         {
-            Console.WriteLine("Made It To Put Method!!!");
             IUpdate editObject = new Update(); //Not working here?
             editObject.UpdateBook(id, value);
-
         }
 
         // DELETE: api/ApiWithActions/5

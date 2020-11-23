@@ -395,26 +395,6 @@ function getBooksToEdit(){
     })
 }
 
-//deletes book from the inventory database
-editBook = function(id){
-    console.log(id);
-    //it needs to get an id so the controller knows which to delete
-    const deleteBookApiUrl = "https://localhost:5001/api/books/" + id;
-    //getting the readlines from the website when a user adds a book
-
-    //make call to the backend, pass it the data, and make it run the delete
-    fetch(deleteBookApiUrl, {
-        method: "DELETE",
-        headers: {
-            "Accept": 'application/json',
-            "Content-Type": 'application/json',
-        }
-    })
-    .then((response)=>{
-        console.log(response);
-        getBooksToDelete();
-    })
-}
 
 //searches all books and puts every matching result in a table along with a corresponding edit button
 function searchEdit(){
@@ -494,35 +474,38 @@ function breakdown(){
 }
 
 function editBook(id){
-    console.log(id);
-
-    const editBookApiUrl = "https://localhost:5001/api/books/" + id;
-    const bookIsbn = document.getElementById("isbn").value;
+    //pass id in with url
+    var editBookApiUrl = "https://localhost:5001/api/books/" + id;
+    //set all text boxes to variables
+    var bookIsbn = document.getElementById("isbnEdit").value;
     console.log(bookIsbn);
-    const bookTitle = document.getElementById("title").value;
+    var bookTitle = document.getElementById("titleEdit").value;
     console.log(bookTitle);
-    const bookAuthor = document.getElementById("author").value;
-    console.log(bookAuthor);
-    const bookGenre = document.getElementById("genre").value;
-    const bookPrice = document.getElementById("price").value;
+    var bookAuthor = document.getElementById("authorEdit").value;
+    var bookGenre = document.getElementById("genreEdit").value;
+    var bookPrice = document.getElementById("priceEdit").value;
+    if(bookIsbn == ""){
+        console.log("its empty")
+        bookIsbn = "123";
+        console.log("isbn " + bookIsbn);
+    }
 
     fetch(editBookApiUrl, {
         method: "PUT",
         headers: {
             "Accept": 'application/json',
             "Content-Type": 'application/json'
-        },
+        }, 
         body: JSON.stringify({
-            id: id,
-            bookIsbn: bookIsbn,
-            bookTitle: bookTitle,
-            bookAuthor: bookAuthor,
-            bookGenre: bookGenre,
-            bookPrice: bookPrice
+            isbn: parseInt(bookIsbn),
+            title: bookTitle,
+            author: bookAuthor,
+            genre: bookGenre,
+            price: parseFloat(bookPrice),
         })
     })
     .then((response)=>{
         console.log(response);
-        getBooksToEdit();
+        getBooksToEdit(); //refresh page
     })
 }
