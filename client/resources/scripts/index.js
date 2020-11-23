@@ -427,49 +427,6 @@ function searchEdit(){
     })
 }
 
-// function breakdown(){
-//     const allSalesApiUrl = "https://localhost:5001/api/books/sales";
-//     fetch(allSalesApiUrl).then(function(response){
-//         console.log(response);
-//         //turn response into a json object we can deal with 
-//         return response.json();
-//     }).then(function(json){
-//         sortTable(0); //sort table
-//         var count = Object.keys(json).length; //get number of rows
-//         //console.log(count); checking if it got the length 
-//         /*border and hover make it formatted*/
-//         let html = "<table id = \"myTable\" class = \"table-bordered table-hover\">";
-//         /*adding the table row and table headers*/
-//         html +="<tr><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
-//         var date = json[0].date;
-//         var year = date.substring(0,4);
-//         var sum = json[0].price;
-//         html += "<tr><td>" + json[0].id + "</td><td>" + json[0].isbn + "</td><td>" + json[0].title + "</td><td>"+ json[0].author + "</td><td>" + json[0].genre + "</td>" + "<td>" + "$" + json[0].price + "</td>" + "<td>" + json[0].name + "</td>" + "<td>" +  json[0].date + "</td>";
-//         for(var i = 1; i < count; i++){
-//             if(json[i].date == year){
-//                 sum += json[i].price;
-//                  html += "<tr><td>" + json[i].id + "</td><td>" + json[i].isbn + "</td><td>" + json[i].title + "</td><td>"+ json[i].author + "</td><td>" + json[i].genre + "</td>" + "<td>" + "$" + json[i].price + "</td>" + "<td>" + json[i].name + "</td>" + "<td>" +  json[i].date + "</td>";
-//             }
-//             else{
-//                 html += "</table>";
-//                 html += sum;
-//                 date = json[i].date;
-//                 year = date.substring(0,4);
-//                 sum = json[i].price;
-//             }
-//         }
-//         json.forEach((book) => {
-//             html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
-//         });
-//         html += "</table>";
-//         //target that html element and set it equal to html
-//         document.getElementById("reports").innerHTML = html;
-
-//     }).catch(function(error){ //catch any errors
-//         console.log(error);
-//     })
-// }
-
 function breakdown(){
     const allBooksApiUrl = "https://localhost:5001/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
@@ -513,5 +470,39 @@ function breakdown(){
 
     }).catch(function(error){ //catch any errors
         console.log(error);
+    })
+}
+
+function editBook(id){
+    console.log(id);
+
+    const editBookApiUrl = "https://localhost:5001/api/books/" + id;
+    const bookIsbn = document.getElementById("isbn").value;
+    console.log(bookIsbn);
+    const bookTitle = document.getElementById("title").value;
+    console.log(bookTitle);
+    const bookAuthor = document.getElementById("author").value;
+    console.log(bookAuthor);
+    const bookGenre = document.getElementById("genre").value;
+    const bookPrice = document.getElementById("price").value;
+
+    fetch(editBookApiUrl, {
+        method: "PUT",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            bookIsbn: bookIsbn,
+            bookTitle: bookTitle,
+            bookAuthor: bookAuthor,
+            bookGenre: bookGenre,
+            bookPrice: bookPrice
+        })
+    })
+    .then((response)=>{
+        console.log(response);
+        getBooksToEdit();
     })
 }
