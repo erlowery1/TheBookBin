@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Xml.Linq;
 using System.Security.Cryptography;
-
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using api.Models.Interfaces;
@@ -19,6 +19,24 @@ namespace api.Models
         //returns a list of all books in the database
         public List<Book> GetAllBooks()
         {
+            // DBConnect db = new DBConnect();
+            // bool isOpen = db.OpenConnection();
+
+            // if(isOpen){
+            //     MySqlConnection conn = db.GetConn();
+            //     string stm = "SELECT * from books";
+            //     MySqlCommand cmd = new MySqlCommand(stm, conn);
+            //     List<Book> allBooks = new List<Book>();
+            //     using(var rdr = cmd.ExecuteReader()){
+            //         while(rdr.Read()){
+            //             allBooks.Add(new Book{Id = rdr.GetInt32(0), Isbn = rdr.GetInt32(1), Title = rdr.GetString(2), Author = rdr.GetString(3), Genre = rdr.GetString(4), Price = rdr.GetDouble(5)});
+            //         }
+            //     }
+            //     db.CloseConnection();
+            //     return allBooks;
+            // }else{
+            //     return new List<Book>();
+            // }
             string directory = Directory.GetCurrentDirectory();
             string cs = @"URI = file:"+ directory+ @"/bookbin.db";
             using var con = new SQLiteConnection(cs);
