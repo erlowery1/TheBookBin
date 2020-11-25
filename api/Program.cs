@@ -17,7 +17,7 @@ namespace api
     {
         public static void Main(string[] args)
         {
-            //seeding the database
+            // //seeding the database
             // ISeedData saveObject = new SaveData();
             // saveObject.SeedData();
             CreateHostBuilder(args).Build().Run();

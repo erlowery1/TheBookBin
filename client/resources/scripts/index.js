@@ -1,6 +1,7 @@
 //gets all books from inventory and puts them in a table format
 function getBooks(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     fetch(allBooksApiUrl).then(function(response){
         console.log(response);
         //turn response into a json object we can deal with 
@@ -11,7 +12,7 @@ function getBooks(){
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th></tr>"
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>";
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + Math.round(book.price * 100)/100 + "</td>";
         });
         html += "</table>";
         //target that html element and set it equal to html
@@ -23,7 +24,8 @@ function getBooks(){
 
 //gets all books from inventory and puts them in a table format
 function getTransactions(){
-    const allSalesApiUrl = "https://localhost:5001/api/books/sales";
+    //const allSalesApiUrl = "https://localhost:5001/api/books/sales";
+    const allSalesApiUrl = "https://thebookbinapi.herokuapp.com/api/books/sales";
     fetch(allSalesApiUrl).then(function(response){
         console.log(response);
         //turn response into a json object we can deal with 
@@ -34,7 +36,7 @@ function getTransactions(){
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>"
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + Math.round(book.price * 100)/100 + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
         });
         html += "</table>";
         //target that html element and set it equal to html
@@ -47,7 +49,8 @@ function getTransactions(){
 
 //gets all books from inventory and prints them out, along with a corresponding delete button
 function getBooksToDelete(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
 
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -61,7 +64,7 @@ function getBooksToDelete(){
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th><th>Delete</th></tr>"
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+  "$" + book.price + "</td>" + 
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+  "$" + Math.round(book.price * 100)/100 + "</td>" + 
             "<td><button onclick = \"deleteBook("+book.id+")\">Delete</button></td></tr>";
         });
         html += "</table>";
@@ -75,7 +78,8 @@ function getBooksToDelete(){
 
 //adds a book to the books table
 function postBook(){
-    const postBookApiUrl = "https://localhost:5001/api/books";
+    //const postBookApiUrl = "https://localhost:5001/api/books";
+    const postBookApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     //getting the readlines from the website when a user adds a book
     const bookTitle = document.getElementById("title").value;
     const bookAuthor = document.getElementById("author").value;
@@ -99,7 +103,7 @@ else{ //add book to inventory
             "Content-Type": 'application/json',
         }, //sending our data
         body:JSON.stringify({
-            isbn: parseInt(bookIsbn),
+            isbn: bookIsbn,
             title: bookTitle,
             author: bookAuthor,
             genre: bookGenre,
@@ -118,7 +122,8 @@ else{ //add book to inventory
 deleteBook = function(id){
     console.log(id);
     //it needs to get an id so the controller knows which to delete
-    const deleteBookApiUrl = "https://localhost:5001/api/books/" + id;
+    //const deleteBookApiUrl = "https://localhost:5001/api/books/" + id;
+    const deleteBookApiUrl = "https://thebookbinapi.herokuapp.com/api/books/" + id;
     //getting the readlines from the website when a user adds a book
 
     //make call to the backend, pass it the data, and make it run the delete
@@ -137,7 +142,8 @@ deleteBook = function(id){
 
 //used to search all available books and put matching results in a table format
 function search(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -151,7 +157,7 @@ function search(){
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th>";
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
-                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>"
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + Math.round(book.price * 100)/100 + "</td>"
             )
             
         });
@@ -166,7 +172,8 @@ function search(){
 
 //used to search all available books and put matching results in a table format along with a delete button
 function searchDelete(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -181,7 +188,7 @@ function searchDelete(){
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
-                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + Math.round(book.price * 100)/100 + "</td>" + 
                 "<td><button onclick = \"deleteBook("+book.id+")\">Delete</button></td></tr>"
             )
         });
@@ -259,7 +266,8 @@ function sortTable(n) {
 
 //finds the total of the inputted book and presents it to the screen
 function getTotal(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     let html = 0.0;
     fetch(allBooksApiUrl).then(function(response){
@@ -270,7 +278,7 @@ function getTotal(){
         json.forEach((book) => {
             //if we found a matching book, increase the total
             if (book.title.toLowerCase() == search || book.isbn == search){
-                 html = "$" + book.price;
+                 html = "$" + Math.round(book.price * 100)/100
                  console.log("price" + book.price);
             }
         
@@ -288,7 +296,8 @@ function getTotal(){
 
 //calculate change that should be given to a customer
 function getChange(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     const change = document.getElementById("getChange").value;
     let html = 0.0;
@@ -311,8 +320,10 @@ function getChange(){
 
 //sell a book- remove it from inventory and add it to transaction
 function bookTotal(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
-    const allTransactionsApiUrl = "https://localhost:5001/api/books/sales";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allTransactionsApiUrl = "https://localhost:5001/api/books/sales";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
+    const allTransactionsApiUrl = "https://thebookbinapi.herokuapp.com/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -350,6 +361,7 @@ function bookTotal(){
                     })
                 })
                 .then((response)=>{
+                    window.location.href= "./index.html";
                     console.log(response);
                 })
             }
@@ -363,7 +375,8 @@ function bookTotal(){
 
 //gets all books and prints to screen, along with a corresponding edit button for each
 function getBooksToEdit(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
 
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -377,8 +390,8 @@ function getBooksToEdit(){
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick =\"sortTable(1)\">ISBN</th><th onclick =\"sortTable(2)\">Title</th><th onclick =\"sortTable(3)\">Author</th><th onclick =\"sortTable(4)\">Genre</th><th onclick =\"sortTable(5)\">Price</th><th>Edit</th></tr>"
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
-            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
-            "<td><button onclick = \"editBook("+book.id+", "+book.isbn+", \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>";
+            html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + Math.round(book.price * 100)/100 + "</td>" + 
+            "<td><button onclick = \"editBook("+book.id+", \'"+book.isbn+"\', \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>";
             //, "+book.title+", "+book.genre+", "+book.price+"
         });
         html += "</table>";
@@ -393,7 +406,8 @@ function getBooksToEdit(){
 
 //searches all books and puts every matching result in a table along with a corresponding edit button
 function searchEdit(){
-    const allBooksApiUrl = "https://localhost:5001/api/books";
+    //const allBooksApiUrl = "https://localhost:5001/api/books";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -408,8 +422,8 @@ function searchEdit(){
         //add each book to the table, including a delete button that links to the delete book method
         json.forEach((book) => {
             if (book.title.toLowerCase() == search || book.isbn == search)(
-                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + book.price + "</td>" + 
-                "<td><button onclick = \"editBook("+book.id+", "+book.isbn+", \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>"
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>"+ book.genre + "</td><td>"+ "$" + Math.round(book.price * 100)/100 + "</td>" + 
+                "<td><button onclick = \"editBook("+book.id+", \'"+book.isbn+"\', \'"+book.title+"\', \'"+book.author+"\', \'"+book.genre+"\', \'"+book.price+"\')\">Edit</button></td></tr>"
             )
         });
         html += "</table>";
@@ -422,7 +436,8 @@ function searchEdit(){
 }
 
 function breakdown(){
-    const allBooksApiUrl = "https://localhost:5001/api/books/sales";
+    //const allBooksApiUrl = "https://localhost:5001/api/books/sales";
+    const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books/sales";
     const search = document.getElementById("search").value.toLowerCase(); //to lower makes it not case sensitive
     //whatever comes back from allbookspaiurl will go back as the response for the then
     fetch(allBooksApiUrl).then(function(response){
@@ -444,7 +459,7 @@ function breakdown(){
              var month = dateString.substring(5,7);
              console.log("month" + month);
             if (book.genre.toLowerCase() == search || year == search || month == search|| yearMonth == search){ // || year == search
-                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + book.price + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
+                html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + Math.round(book.price * 100)/100 + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
                 revenue += book.price;
             }
         });
@@ -470,7 +485,8 @@ function breakdown(){
 //edits a book in inventory
 function editBook(id, isbn, title, author, genre, price){
     //pass id in with url
-    var editBookApiUrl = "https://localhost:5001/api/books/" + id;
+    const editBookApiUrl = "https://thebookbinapi.herokuapp.com/api/books/" + id;
+    //const allBooksApiUrl = "https://thebookbinapi.herokuapp.com/api/books";
     //set all text boxes to variables
     var bookIsbn = document.getElementById("isbnEdit").value;
     var bookTitle = document.getElementById("titleEdit").value;
@@ -510,14 +526,14 @@ function editBook(id, isbn, title, author, genre, price){
         method: "PUT",
         headers: {
             "Accept": 'application/json',
-            "Content-Type": 'application/json'
-        }, 
-        body: JSON.stringify({
-            isbn: parseInt(bookIsbn),
+            "Content-Type": 'application/json',
+        }, //sending our data
+        body:JSON.stringify({
+            isbn: bookIsbn,
             title: bookTitle,
             author: bookAuthor,
             genre: bookGenre,
-            price: parseFloat(bookPrice),
+            price: parseFloat(bookPrice)
         })
     })
     .then((response)=>{

@@ -74,6 +74,7 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Book value)
         {
+            Console.WriteLine("made it to edit controller");
             IUpdate editObject = new Update(); //Not working here?
             editObject.UpdateBook(id, value);
         }

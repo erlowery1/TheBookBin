@@ -17,7 +17,7 @@ namespace api.Database
 
             cmd.CommandText = "DROP TABLE IF EXISTS books";
             cmd.ExecuteNonQuery();
-            cmd.CommandText = @"CREATE TABLE books (id INTEGER PRIMARY KEY, isbn INTEGER, title TEXT, author TEXT, genre TEXT, price FLOAT)";
+            cmd.CommandText = @"CREATE TABLE books (id INTEGER PRIMARY KEY, isbn TEXT, title TEXT, author TEXT, genre TEXT, price FLOAT)";
             cmd.ExecuteNonQuery();
             
             cmd.CommandText = @"INSERT INTO books (isbn, title, author, genre, price) VALUES(@isbn, @title, @author, @genre, @price)";
@@ -95,7 +95,7 @@ namespace api.Database
 
             cmd.CommandText = "DROP TABLE IF EXISTS transactions";
             cmd.ExecuteNonQuery();
-            cmd.CommandText = @"CREATE TABLE transactions (id INTEGER PRIMARY KEY, isbn INTEGER, title TEXT, author TEXT, genre TEXT, price FLOAT, name TEXT, date TEXT)";
+            cmd.CommandText = @"CREATE TABLE transactions (id INTEGER PRIMARY KEY, isbn TEXT, title TEXT, author TEXT, genre TEXT, price FLOAT, name TEXT, date TEXT)";
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = @"INSERT INTO transactions (isbn, title, author, genre, price, name, date) VALUES(@isbn, @title, @author, @genre, @price, @name, @date)";
