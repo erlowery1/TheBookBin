@@ -16,10 +16,10 @@ namespace api.Models
         }
         private void Initialize(){
             server = "sql9.freemysqlhosting.net";
-            user = "sql9378239";
-            password = "32TiJLu7uC";
+            user = "sql9379553";
+            password = "5s6vThe1hV";
             port = "3306";
-            database = "sql9378239";
+            database = "sql9379553";
 
             string cs = "server="+server+";user="+user+";database="+database+";port="+port+";password="+password+";";
             connection= new MySqlConnection(cs);

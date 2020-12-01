@@ -450,7 +450,7 @@ function breakdown(){
         /*adding the table row and table headers*/
         html +="<tr style=\"background-color:#aac8c8;\"><th onclick = \"sortTable(0)\">ID</th><th onclick = \"sortTable(1)\">ISBN</th><th onclick = \"sortTable(2)\">Title</th><th onclick = \"sortTable(3)\">Author</th><th onclick = \"sortTable(4)\">Genre</th><th onclick = \"sortTable(5)\">Price</th><th onclick = \"sortTable(5)\">Name</th><th onclick = \"sortTable(5)\">Date</th></tr>";       
         var total = "Your total revenue for "+search+" was: ";
-        var revenue = 0;
+        var revenue = 0.0;
         json.forEach((book) => {
             //break data into different vars we can compare with the search 
              var dateString = book.date;
@@ -460,7 +460,7 @@ function breakdown(){
              console.log("month" + month);
             if (book.genre.toLowerCase() == search || year == search || month == search|| yearMonth == search){ // || year == search
                 html += "<tr><td>" + book.id + "</td><td>" + book.isbn + "</td><td>" + book.title + "</td><td>"+ book.author + "</td><td>" + book.genre + "</td>" + "<td>" + "$" + Math.round(book.price * 100)/100 + "</td>" + "<td>" + book.name + "</td>" + "<td>" +  book.date + "</td>";
-                revenue += book.price;
+                revenue += book.price; 
             }
         });
         console.log(sum);
@@ -471,7 +471,7 @@ function breakdown(){
             html = " ";
         }
         else{
-            total = total + " $" + revenue;
+            total = total + " $" + Math.round((revenue) * 100 + Number.EPSILON) / 100;;
         }
         //target that html element and set it equal to html
         document.getElementById("reports").innerHTML = html;
